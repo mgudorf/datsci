@@ -1,0 +1,73 @@
+% pdflatex blog; bibtex blog
+\input{inputs/inclOnly}        % process only the file you are editing
+
+% siminos/spatiotemp/blog.tex  pdflatex blog; biber blog
+                        %% logical setup, no need to edit %%%%%%%%%%
+                        \newif\ifpaper \newif\ifPDF               %%
+                        \newif\ifOUP \newif\ifboyscout            %%
+                        \newif\ifdasbuch \newif\ifarticle         %%
+                        \newif\ifsolutions                        %%
+                        \newif\ifsvnmulti			              %%
+%                         \svnmultitrue %% turn on svn-multi	      %%
+                        \dasbuchtrue %% DasBuch, not QFT lectures %%
+                        \boyscouttrue %% commented, WWW/boyscouts %%
+                        \solutionstrue %% include solutions       %%
+                        \paperfalse\PDFtrue %% hyperlinked        %%
+                        \OUPfalse \articlefalse  %% ChaosBook %%%%%%
+
+\documentclass[letter,10pt,openany]{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,bm}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{alltt}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}     % was [latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{palatino,lettrine}  %first letter of chapters, Gossens ed 2, p.99
+\usepackage{dsfont}
+\usepackage[pdftex]{graphicx}
+\usepackage[nooneline]{caption} % 2011-07-23 consider switching to floatraw
+\usepackage{subcaption}
+\usepackage{epstopdf}
+\usepackage{array}
+%\usepackage{eufrak} % TEMPORARY, used by L\'{o}pez\rf{Lopez2015}
+\usepackage[pdftex,colorlinks]{hyperref}
+\usepackage{verbatim}
+\graphicspath{{../figs/}}  %% directories with graphics files
+      %% page layout, ChaosBook environments
+%\input{inputs/biblatex}
+%	\addbibresource{../bibtex/statmech.bib}
+\input{../inputs/editsDasbuch}   %% editing comments, DasBuch style
+\input{../inputs/def}            %% do not edit; update from dasbuch/book/inputs/def.tex
+\input{../inputs/defsSpatiotemp}
+
+\hypersetup{
+   pdfauthor=Matt Gudorf
+   pdfkeywords=springboard,
+   pdftitle=Springboard Meeting Notes}
+
+\begin{document}
+
+\input{inputs/blogTitle}
+\maketitle
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\newpage
+\section{Mike Badescu}
+\include{meetings/mike1}
+\include{meetings/mike2}
+\include{meetings/mike3}
+\include{meetings/mike4}
+\include{meetings/mike5}
+%%%%%
+
+
+
+
+\end{document}

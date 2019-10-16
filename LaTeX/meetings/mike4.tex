@@ -1,0 +1,116 @@
+\subsection{Mike Badescu(4) Wednesday, September 25th 2019}
+
+\subsubsection{project proposal}
+Mainly want to discuss capstone project.
+
+Other medical (pneumonia) data had too many values
+for fields I did not understand (medical jargon). (Mike actually
+prefers this).
+
+Visual (x-rays, ct scans) tells a better story
+because it's visual; also, it almost automatically
+comes with the quantity to predict, which are
+diseases.
+
+Started to use feature detection in skimage.
+Probably should determine filters based on specific
+diseases as they are comprised of different features.
+
+So far: for an image I can pick out the peak local maxima
+and then pick out the features of said picture. The
+lack of contrast in x-ray data probably precludes
+direct analysis.
+
+If I can detect specific features (don't want to miss
+anything; this could lead to misdiagnoses), then I should
+be able to calculate the resulting scatter plot's (without peak local max)
+persistent homology. Or directly into machine learning algorithms
+
+Questions:
+
+Does this sound reasonable? It's supervised training for sure.
+\begin{enumerate}
+\item Collect and parse image data
+\item Find peak local max (data reduction)
+\item Find scaling invariant features (ORB),(Further reduction)
+\item Persistent homology (EVEN FURTHER data reduction)
+\item Machine learning algorithm
+\end{enumerate}
+
+Should the capstone projects always include some type
+of deep learning algorithm?
+
+The story.
+
+I will attempt to diagnose lung diseases by analyzing chest (lung)
+x-ray image data. Diagnosis of specific diseases corresponds
+to detecting features and interpreting the intensity of the imaging data.
+In terms of rankings of the difficulty of perceptual tasks (as determined
+by accuracy)it is known that color and density are the perceptual tasks
+with the worst accuracy, with shape only being slightly better.
+From \textit{Automating the design of graphical presentations of relational information} by Jock Mackinlay
+\textit{Visual variables} by Robert Roth
+\textit{Semiology of graphics: diagrams, networks, maps.} by Jacques Bertin.
+Because x-ray image data is not ordered or quantitative it falls under
+the ``nominal'' category; image data unordered collection of shapes sand intensities.
+
+Therefore we need some shape, color, intensity independent metric to quantify
+diseases, preferably which is independent of human interpretations.
+
+Diagnoses are hard because it typically requires human intervention.
+Misdiagnoses are very costly (life).
+
+Using various methods of data reduction I will predict the presence of disease.
+I will measure this via either machine learning categorization or persistent homology
+and machine learning categorization. In other words the question being asked is,
+do different diseases have different topologies?
+\subsubsection{Capstone Project Methods: The topology of lung disease}
+\begin{enumerate}
+\item peak local max (skimage)
+\item ORB(skimage)
+\item TDA(rachel levanger codes?)
+\item Machine learning algorithm (sklearn)
+\end{enumerate}
+
+
+\subsubsection{Meeting}
+Network searcher
+Convolutions layers pick up invariant layered shapes.
+Fit by rotation and scaling
+
+In certain areas, models are really outperforming and custom
+work. Images and sounds, there is a lot of redundancy.
+
+Neural networks are able to pick up elements right away.
+No random forest or logistic regression.
+
+``it'' is applying common algorithms to images and
+classifying images. If it is developing algorithms then NO!
+
+Mike has an issue with these images; applying deep learning
+to images is trivial; other data does not have the structure.
+Startup in Dallas that
+
+What happens after ``is it a cat or dog'' is not. If it's a just a cat then it doesn't.
+This is a starting point, deep learning is a little too much for the first project.
+
+Have to go through all the steps until you get there. Need to classify data property; how
+will I know what the ``right type'' of neural network, dropout layers, descent algorithm.
+
+Goal of this stuff is to use algorithms.
+
+Prepare to be disappointed if you're not open to
+different models.
+
+Mike's current project (not the domain expert).
+Dirty data; should have duplicates and groups of
+observations. Better algorithm on dirty data; can't comprehend how dirty data is when its large. Initial models are not that good. Mike can spend more time to improve the models. Much
+easier to get quick improvements and then pass it to someone with more experience. Combination,
+switching to different algorithms and find out what is a good result.
+
+Baseline, random forest, logistic regression and
+compare the results.
+
+Image processing: Might have to spend money. Get basic algorithms running on machine or buy computational. Keras tensorflow.
+
+Hypothesis testing; learn this via network science project. 

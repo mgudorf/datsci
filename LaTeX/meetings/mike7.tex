@@ -1,0 +1,125 @@
+\subsection{Mike Badescu(7) Wednesday, October 16th 2019}
+
+\subsubsection{project proposal...backtracking...again?}
+
+For categorical data with missing values just add ``missing'' as a
+category itself. I can also rebin categories to clean up the data.
+
+Sometimes can take datasets and look at the
+different levels. I.e. go from patients of hospitals to hospitals
+themselves. Feature hashing was the other method that Mike mentioned.
+
+What about numerical data? Need to replace missing values
+with numbers, how
+to replace with what number? Large topic of discussion:
+possibilities include average, median etc. It's important
+to add a ``flag'' column which indicates whether the specific value
+is artificial or real.
+
+If you can stratify the observations;
+for instance, compute the median by age or
+gender. i.e. it's possible to use a combination of several
+variables to predict the missing value.
+This can lead to regression within regression. 
+For instance, each model produces a corresponding dataset
+which differs from other models. Therefore, I have a dataset of 
+datasets: can think of this like a probability
+distribution. With the distribution I can compute statistics
+and sample it just like any other distribution.
+
+Need a good ``signal''. For example, humans can intuitively
+think about important features in, say, pattern recognition.
+This isn't as obvious when applied to vectors of data consisting
+of binary or categorical information. 
+
+``I noticed projects online that consist of visualization
+by for no rhyme or reason''.
+The rumours of the data science field being saturated;
+missing from the notebooks is narrative.
+
+Literature, narrative, code and graphs. Want to always
+have experience in plotting and things just to demonstrate
+that you can do it.
+Many people make expedient graphs and code because
+they are doing things for the wrong reason. Some people
+do webcasts on taking data and then showing what they
+can do with it (in a short amount of time).
+Worst thing is to not explore the data at all.
+
+``Should I be developing my own tools to use in the future?''
+Don't develop tools just yet; just explore the various possibilities
+right now. Don't try to make the perfect function that does everything.
+
+If a function takes more than one page then it takes too long.
+It's about getting quick feedback. Modularize things in less than one page.
+Train, test, print, analyze.
+
+Splitting dataset in a non biased manner. Mentioned time dependent data.
+Read csv skipping lines; have a function
+that reads a file line by line and does the sampling within the file; and
+try read csv at first; just use pandas to sample for you. 
+Need to get a set of the data to look at.
+How to use categorical data in numerical schemes; convert
+the categories in some way. Categorical variables like child, women, men.
+``int off''. Have a dummy variable (binary).
+One column for male ($1$ if male, $0$ otherwise), one for female
+($1$ if female, $0$ otherwise). ``One hot'' coding;
+need to drop one of these columns because of collinearity.
+This is because in terms of boolean array male is the logical not
+of female. In problems with many categories this creates a large
+number of columns. They can be read into a neural network.
+For random forests you don't need to splitting of categoricals; should
+be able to just input the categorical information.
+
+\textbf{Mike mentions random forest a lot. Should probably use it.}
+
+(some algorithms can take categories). The curse of dimensionality
+then plays a factor however. For this reason I'll want
+to do some binning or something if I know something about the data.
+e.g. create a dummy variables only for a percentage of variables
+by pooling the small categories.
+
+More interesting is feature hashing. Hashing function takes
+a number; hashing is to put input in, and get random output
+from a distribution.
+
+Start from one thousand categories and map it into fifty.
+Have ``collisions'' which will be random (inconsistent models?).
+Works better for some distributions better than others.
+Frequency of words feature hashing is very good for because
+of rare words power law.
+
+Vector outgoing encoding. Imagine I have a neural network;
+``one hot'' encoding, middle has small number of nodes but
+the output has the same number of dimensions. (Hourglass structure).
+
+Yet another way is regularization; let regularization (penalty for
+the number of beta's that I have in my model) This penalizes size
+of the betas.
+It's a regression by linear combination.
+Error term, actual minus predicted then compute betas.
+method of variations, lagrange multipliers ($\lambda \beta^2$).
+
+Many optimization methods for performing gradient descent.
+For optimization we need to learn more about large samples;
+Need to do things in batches or somewhat randomly; stochastic
+gradient descent. Sometimes better improvements by optimization
+of small number of variables.
+Lots of machine learning is about imitating;
+
+If you are missing more than five percent of the values
+missing it's not really worth it.
+Kind of works from preselecting people from loans;
+have models for watching models?
+May not have a more likely
+Can you see logging in info, monitoring, level of care
+then it's not as informative.
+Subjective weights; use it for a specific instance, use
+a specific formula for a particular case.
+
+Easiest way is to combine the analysis of 
+two datasets (easiest way to find new results).
+
+Should think in terms of a classification model;
+zero and one are quite obvious: getting accepted
+or not. Don't have other predictive information really.

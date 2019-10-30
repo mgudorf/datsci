@@ -48,7 +48,10 @@ SELECT facid,
 		membercost,
 		monthlymaintenance
 FROM Facilities
-WHERE 0.2 * membercost < monthlymaintenance AND membercost > 0 
+WHERE membercost < 0.2 * monthlymaintenance AND membercost > 0 
+/* Does membercost = 0 count as where the fee is less than maintenance cost?
+Remove AND statement if so. */
+
 
 /* Q4: How can you retrieve the details of facilities with ID 1 and 5?
 Write the query without using the OR operator. */
@@ -67,11 +70,14 @@ SELECT name,
 		monthlymaintenance,
 		CASE WHEN monthlymaintenance < 100 
 				THEN 'cheap' 
-			WHEN monthlymaintenance > 100 
-					THEN 'expensive'
+			WHEN monthlymaintenance >= 100 
+				THEN 'expensive'
 			ELSE NULL 
 		END as price_category
 FROM Facilities
+/* Premise doesn't indicate how to handle monthlymaintenance=100
+so I'm calling it expensive because I'm a poor graduate student. */ 
+
 
 
 /* Q6: You'd like to get the first and last name of the last member(s)

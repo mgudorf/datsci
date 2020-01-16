@@ -103,15 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#latex log files
-*.aux
-*.log
-*.synctex
-*.out
-*.bcf
-*.xml
-*.toc
-
-*.zip
-/practice
-/papers
+#data files
+data/
+*.csv
+*.sqlite
+*.xlsx

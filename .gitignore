@@ -108,3 +108,5 @@ data/
 *.csv
 *.sqlite
 *.xlsx
+
+practice/

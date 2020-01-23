@@ -110,3 +110,12 @@ data/
 *.xlsx
 
 practice/
+
+#latex
+*.aux
+*.out
+*.bak
+*.synctex
+*.log
+*.bcf
+*.cbx

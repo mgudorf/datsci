@@ -119,3 +119,6 @@ practice/
 *.log
 *.bcf
 *.cbx
+
+#capstone2specific
+COVID-19/

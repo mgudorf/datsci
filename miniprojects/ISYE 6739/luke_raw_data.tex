@@ -1,0 +1,10 @@
+The doubling time of the virus is an important number as it provides an indication of how quickly the spread is happening. It is relatively simple to determine from cumulative data, directly arising from the data rather than requiring additional analysis.
+However, it does not provide specific or individual information, and can vary greatly depending on the timescale.
+To calculate and analyze the doubling of COVID-19, we looked at a dataset provided by Johns Hopkins \cite{john_hopkins}, which provides information of many different regions on a day by day basis. 
+These regions are either global regions, consisting of countries or large regions.
+\if\LukeDoStates1
+Additionally, data for the United States in the format was used.
+\fi
+This data is updated daily, as such we have data from 2020-01-22 through \input{luke/end_date.csv}
+The data consists of a CSV file where each row corresponds with a region, there are a few columns of meta-data, followed by the remaining columns, one for each day since 2020-01-22, which contain the number of cumulative confirmed cases on a given day.
+Additionally, we referenced the calculated doubling time from \cite{systemic_review}, \cite{high_contagiousness}, to compare our results to.

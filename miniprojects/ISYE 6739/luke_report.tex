@@ -1,0 +1,54 @@
+\begin{table}[htb!]
+  \caption{Doubling time of countries}
+  \label{table:doubling_countries}
+  \begin{adjustbox}{width=\linewidth}
+    \csvautotabulartop[respect all]{luke/unfiltered_countries_doubles_0.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_countries_doubles_1.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_countries_doubles_2.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_countries_doubles_3.csv}
+  \end{adjustbox}
+\end{table}
+
+\if\LukeDoStates1
+\begin{table}[htb!]
+  \caption{Doubling time of states}
+  \label{table:doubling_states}
+  \begin{adjustbox}{width=\linewidth}
+    \csvautotabulartop[respect all]{luke/unfiltered_states_doubles_0.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_states_doubles_1.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_states_doubles_2.csv}
+    \csvautotabulartop[respect all]{luke/unfiltered_states_doubles_3.csv}
+  \end{adjustbox}
+\end{table}
+\fi
+
+To analyse the spread of Covid-19, we looked at the stasticial significance of the doubling time between different countries.
+To accomplish this, we used the dataset from John Hopkins, which included cumulative cases for different cities in different regions.
+We accumulated the data by region, before remapping the data to consider the number of days since the country first had 100 confirmed cases.
+This allows a better inter country comparison.
+We then filtered out countries for which had less than 1000 cases, to ensure that enough of the trend could be seen to derive some conclusions from, as well as countries who's reported cases did not increase more than 1\% between the five most recent days (removing \input{luke/unfiltered_countries_removed_growth.csv} due to growth).
+
+\AddLukeFigure{unfiltered}{countries}{Countries}
+%Unfiltered Countries
+This resulted in \input{luke/unfiltered_countries_remaining_count.csv} countries, of which the minimum time frame was \input{luke/unfiltered_countries_max_timescale.csv}.
+To calculate the doubling time for each country, we compared the number of days between the first day of 100 cases and the current day, and the number of doubling between the two dates.
+The resulting countries, cumulative cases, and doublings can be seen in Figure \ref{fig:doublings_unfiltered_countries}.
+
+Treating each country as a separate sample, we performed a confidence interval on the expected doubling time, as well as plotting a histogram and box plot, and normality analysis.
+We determined that the sample mean was \input{luke/unfiltered_countries_mean.csv}, with a confidence interval \input{luke/unfiltered_countries_ci.csv} with $\alpha=0.05$. 
+This is comparable to the results seen in \cite{systemic_review}, where they reference papers with confidence intervals 6.4 to 7.4, and 2.9 to 4.6, where our results fall very close to the first, and larger than \cite{high_contagiousness} where they found a confidence interval for the initial Wuhan outbreak to be 2.3-3.3.
+We do note that our data uses much more recent data (up until \input{luke/end_date.csv}), and considers all data reported, where the papers only consider data up to their publication.
+Through a normality consideration, we see that we get a p-value of \input{luke/unfiltered_countries_p.csv}, indicating that we can reject the hypothesis that the data is normal with $\alpha=0.05$. 
+
+
+
+%\AddLukeFigure{filtered}{countries}{Countries without outliers}
+%By repeating the analysis with the two outliers removed (Bahrain, Japan, Denmark), we find a new confidence interval \input{filtered_countries_ci.csv}.
+%The new plot can be seen in Figure \ref{fig:test_filtered_countries}, where a normality p-value of \input{filtered_countries_p.csv}, indicating that the data does in fact follow a normal distribution.
+
+
+\if\LukeDoStates1
+\AddLukeFigure{unfiltered}{states}{States}
+We also looked at the distribution of doubling within the United States on a per state basis. The same initial filtering was done, which removed \input{luke/unfiltered_states_removed_end.csv} due to not having more than 1000 cases.
+The new plot can be seen in Figure \ref{fig:test_unfiltered_states}, where a normality p-value of \input{luke/unfiltered_countries_p.csv}, indicating that the data does in fact follow a normal distribution.
+\fi

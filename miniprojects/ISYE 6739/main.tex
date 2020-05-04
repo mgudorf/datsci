@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{csvsimple}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage[T1]{fontenc}
+\usepackage{grffile}
+\usepackage[margin=1in]{geometry}
+\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage[nottoc]{tocbibind}
+\usepackage[section]{placeins}
+%\usepackage{subfig}
+\usepackage{paralist}
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\setlength{\parindent}{5ex}
+\setlength{\parskip}{1ex}
+\input{luke_preamble.tex}
+\title{ISYE 6739 Project Final Report}
+%For tomorrow:
+%For each person
+%    Have raw data, analysis, implications and future work
+%    Have visuals for presentation complete
+%    If have time do writeup audio part
+
+\author{Lechen Yu, Sara Miller, Matt Gudorf, Luke Erlandson}
+%Order: Lechen Matt Luke Sara
+\date{Spring 2020}
+
+\begin{document}
+
+\maketitle
+
+%\section*{Abstract}
+\begin{abstract}
+
+This work investigates the geographic and temporal transmission of the 2019 novel coronavirus. A variety of statistics tools were used to draw inferences on this highly-dynamic problem. %Add Lechen's Stuff %Add Matt's Stuff 
+Social distancing, quarantines, stay-at-home orders and other mandates have slowed the spread of COVID-19 throughout the world. These practices come with their own costs, however, in regards to mental health, unemployment, education, etc. Because the situation is in a constant state of change, it is important to identify the most effective measures because they might need to be reenacted upon the emergence of a second wave of proliferation.
+%Luke's Stuff
+We preform an investigation on the doubling rate of the infection rate by country, both as a distribution and looking at individual countries.
+Finally, a literature review of peer-reviewed medical journals was performed to compile a data set with published estimates of the basic reproduction number ($R_0$). From these published estimates, a meta-analysis was performed to answer the following question: is $R_0$ for COVID-19 in China decreasing with time? A simple linear regression analysis showed no significant correlation between the dates of the studies and their resulting estimates for $R_0$. Therefore, we conclude that more time must pass before the relationship between $R_0$ and time can be gleaned from simple linear regression. An online version of our presentation is available via \href{https://docs.google.com/presentation/d/17ZegWwXkD2-FEV-3EgUg825KnwtbHrZZuWgpTryxcOs/edit?usp=sharing}{Google Slides}.
+
+\end{abstract}
+\tableofcontents
+
+\section{Background and Justification}
+
+The 2019 novel coronavirus (COVID-19) has already resulted in more deaths than severe acute respiratory syndrome (SARS) and Middle East respiratory syndrome (MERS) combined, so understanding the transmission dynamics of this outbreak is critical to informing the public health approach \cite{1}. The current report focuses on the growth patterns associated with COVID-19, as indicated by the number of confirmed cases and number of deaths. To understand this phenomenon, we consider the effect of weather and geographic location, estimates of the virus' reproduction number obtained from medical journals, the doubling time between countries, and the impact of self-isolation measures. 
+
+\section{Description of Raw Data}
+%1-2 Paragraphs each
+
+%Lechen's Data Description
+\input{lechen_raw_data}
+
+%Matt's Data Description
+\input{matt_raw_data.tex}
+
+\input{luke_raw_data.tex}
+
+The basic reproduction number, $R_0$, is used by epidemiologists to quantify the intensity of an infectious disease. A disease’s $R_0$ is defined as the average number of people who will contract a disease from one contagious person. Thus, an accurate estimate of $R_0$ is instrumental to characterizing the transmission of COVID-19. An $R_0$ $>$ 0 indicates that the number of infected people is likely to increase, whereas an $R_0$ $<$ 0 indicated that the transmission of the disease is likely to die out. Therefore, the higher a disease’s $R_0$, the greater the risk to a population. A literature review of peer-reviewed medical journals was conducted to compile a data set of estimates for $R_0$ for COVID-19 in China. A total of 32 estimates for $R_0$, along with the corresponding 95\% confidence intervals and study dates, are provided in Appendix A. In the literature, a confidence level of 95\% was found to be the standard for discussions involving $R_0$. The "Study Date" column in Appendix A refers to the cutoff date for the number of COVID-19 confirmed cases that was used in each study. Some researchers used different mathematical models to develop multiple estimates of $R_0$ and each of those estimates was included as separate data points. Due to the overlap of data sets, researchers, and mathematical approaches to estimating $R_0$, this data is not independent.
+
+\section{Statistical Analyses}
+
+\subsection{COVID-19 growth interaction with geography and weather data}
+\input{lechen_report}
+\subsection{COVID-19 growth interaction with quarantine measures and country}
+\input{matt_report.tex}
+\subsection{Doubling Time Analysis}
+\input{luke_report.tex}
+
+\subsection{Basic Reproduction Number Analysis}
+A meta-analysis was performed using published estimates for COVID-19's $R_0$. From the sample captured by the $R_0$ data set provided in Appendix A, descriptive statistics were used to quantify and visualize the central tendency and spread of these estimates. Table \ref{tab:table1} summarizes some of the relevant numeric properties of the sample. Note that a mean $R_0$ of 3.45 is interpreted as an infected person transmitting the virus to 3.45 others, on average.
+
+\begin{table}[htp]
+  \begin{center}
+    \caption{Descriptive Statistics for the $R_0$ Estimates.}
+    \label{tab:table1}
+    \begin{tabular}{l|r}
+    \hline \hline
+      \textbf{Measure} & \textbf{Result} \\
+      \hline
+      Mean & 3.45\\
+      Median (Q2) & 3.01\\
+      Minimum & 1.90\\
+      Maximum & 6.49\\
+      Range & 4.59\\
+      Standard Deviation & 1.41\\
+      Variance & 1.99\\
+      1\textsuperscript{st} Quartile (Q1) & 2.27\\
+      3\textsuperscript{rd} Quartile (Q3) & 4.43\\
+      Interquartile Range (IQR) & 2.16\\
+      \hline \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Using the quartile results in Table \ref{tab:table1}, a box plot of the $R_0$ estimates was plotted in figure \ref{R0DescStats} (a). To check for outliers, the lower bound and upper bound were calculated to be -0.96 and 7.66, respectively. Because all of the $R_0$ estimates used in the current analysis are contained within the range between the lower and upper bounds, none of the estimates in the data set were found to be outliers. To further visualize the spread of data, a scatter plot is provided in figure \ref{R0DescStats} (b). The magnitude of $R_0$ is plotted against the width of each estimate's 95\% confidence interval, which was calculated by taking the difference between the confidence interval's upper and lower bounds.
+
+\begin{figure}[!tbp]
+  \centering
+  \subfloat[$R_0$ Box Plot]{\includegraphics[width=0.5\textwidth]{sm1.pdf}\label{fig:f1}}
+  \hfill
+  \subfloat[$R_0$ Scatter Plot]{\includegraphics[width=0.5\textwidth]{sm2.pdf}\label{fig:f2}}
+  \caption{Descriptive Statistics for $R_0$ Estimates.}
+    \label{R0DescStats}
+\end{figure}
+
+Next, we aim to investigate the relationship between the magnitude of the $R_0$ estimate and the study date. The goal of this analysis is to indicate whether the transmission of the virus has grown or lessened over time. A Chinese governmental ban on public transportation that was invoked on January 23, 2020 for five major cities (Wuhan, Huanggang, Ezhou, Chibi and Zhijiang) \cite{2}. Thus, we choose to divide the data set into two groups: set 1 includes $R_0$ estimates from studies that used COVID-19 case data leading up to and including January 23, 2020 and set 2 data includes $R_0$ estimates from studies that considered reported cases of COVID-19 since January 23, 2020. The sample size of set 1 and set 2 are equal with 16 estimates in each category. Histograms to show the distribution of both data sets are provided in figure \ref{R0Hists}. Both distributions are positively skewed, favoring lower magnitude $R_0$ estimates.
+
+\begin{figure}[!tbp]
+  \centering
+  \subfloat[$R_0$ Data Set 1 Histogram]{\includegraphics[width=0.5\textwidth]{sm6.pdf}\label{fig:f1}}
+  \hfill
+  \subfloat[$R_0$ Data Set 2 Histogram]{\includegraphics[width=0.5\textwidth]{sm7.pdf}\label{fig:f2}}
+  \caption{Distributions of Set 1 and Set 2 Data for $R_0$ Estimates}
+    \label{R0Hists}
+\end{figure}
+
+A simple linear regression analysis is performed using the study date as the independent/predictor variable and the $R_0$ estimate as the dependent/response variable. To turn the study date into an integer, the earliest study date was given a value of zero and each day thereafter is incremented by a value of one. The resulting regression equation is \^{y} = 0.00158X + 3.4152. Because the slope of the regression line is nearly zero, we conclude that there is very little correlation between the study date and R0 estimate. The linear regression results are plotted in figure \ref{R0Reg}. A summary of the regression results is provided in table \ref{tab:table2}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=10cm]{sm5.pdf}
+  \caption{Linear Regression Results for $R_0$ Estimates}
+  \label{R0Reg}
+\end{figure}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Simple Linear Regression Results for $R_0$ Estimates.}
+    \label{tab:table2}
+    \begin{tabular}{l|r}
+    \hline \hline
+      \textbf{Regression Result} & \textbf{Value} \\
+      \hline
+      $\bar{X}$ & 24.16\\
+      $\bar{Y}$ & 3.45\\
+      $\hat{\beta_{0}}$ & 3.415\\
+      $\hat{\beta_{1}}$ & 0.0016\\
+      $SS_{Error}$ & 61.5468\\
+      $SS_{Total}$ & 61.5525\\
+      $SS_{Regression}$ & 0.0057\\
+      Means Squared Error (MSE) & 2.0516\\
+      $\alpha$ & 0.05\\
+      df (n - 2) & 30\\
+      $t_{\alpha/2, n-2}$ & 2.042\\
+      Margin of Error of C.I. (E) & 0.5337\\
+      95\% C.I. for \^{y} = 3.45 & (2.9163, 3.9837)\\
+      \hline \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\section{Implications}
+\input{luke_implications.tex}
+
+The initial hypothesis that $R_0$ would decrease over time in response to social distancing and restrictions on public gatherings was not confirmed in the current analysis. Instead, no significant correlation between study dates and estimated $R_0$ was found. Nonetheless, we do not conclude that these variables are entirely unrelated. Instead, it is proposed that more time and more observations are necessary to observe a relationship between these variables using simple linear regression.
+%Short individual implications
+The implications of the two-way ANOVA analysis with countries and
+government quarantine responses are that both the
+factors have statistically significant effects. If the results
+are taken seriously then this would imply that a custom tailored approach should be considered when decided upon the quarantine measures to enact.
+%Then combination of those
+\section{Future Work}
+%Lechen's Stuff
+The analysis on the effect of geography data indicates that it has a negative correlation with COVID-19's spread. We plan to further analyze this relationship in a fine-grained manner (e.g., analyzing the growth rate for each city in China). In addition, we will also examine other weather data to find potential factors that affect the spread of COVID-19.
+
+%Matt's Stuff
+The analysis on the effect of different quarantine measures do not take a number of details into account. The most important of which is the fact that the quarantine measures are not independent as they are overlap in regards to time. Therefore, to analyze quarantine
+measures correctly there should likely be a different method developed which accounts for this. Other considerations also need to be made such as how the number of cases depends on the number of tests.
+
+%Luke's Stuff
+Given the doubling rate per country, it would be possible to attempt to correlate factors of countries, such as population density, to see what factors impact the doubling time. 
+Furthermore, one could look into how the doubling time changes with respect to the measures put in place as a proxy for determining the effectiveness of the measures.
+
+%Sara's Stuff
+Given more time, extending the literature review for published estimates of $R_0$ for COVID-19 in China to produce a greater sample size would strengthen the statistical analyses performed for the current meta-analysis. If enough observations were collected in each data set such that n > 30 for estimates using reported cases prior to (data set 1) and after (data set 2) January 23, 2020, then using the assumption of approximately normally-distributed data could expand the number of inferences that could be drawn on this data.
+
+\begin{thebibliography}{}
+\bibitem{1} 
+World Health Organization. Coronavirus disease 2019 (COVID-19) situation reports, 2020.
+\bibitem{2} 
+BBC NEWS. "Coronavirus: Wuhan Shuts Public Transport over Outbreak." Jan. 23, 2020.
+\bibitem{john_hopkins}
+Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE)
+\bibitem{owid}
+Our World in Data. Joe Hasell, Esteban Ortiz-Ospina, Edouard Mathieu, Hannah Ritchie, Diana Beltekian and Max Roser \url{https://github.com/owid/covid-19-data/tree/master/public/data/}
+\bibitem{find}
+Foundation for Innovative New Diagnostics. COVID-19 Testing Tracker. 
+\url{https://finddx.shinyapps.io/FIND\_Cov\_19\_Tracker/}
+\bibitem{govtresponse}
+A. Petherick, T. Hale, T. Phillips, S. Webster, Variation in Government Responses to COVID-19. Preprint
+\url{https://www.bsg.ox.ac.uk/research/publications/variation-government-responses-covid-19}
+\bibitem{systemic_review}
+  M. Park, A. R. Cook, J. T. Lim, Y. Sun, and B. L. Dickens, “A Systematic Review of COVID-19 Epidemiology Based on Current Evidence,” Journal of Clinical Medicine, vol. 9, no. 4, p. 967, Apr. 2020, doi: 10.3390/jcm9040967.
+\bibitem{high_contagiousness}
+  S. Sanche, Y. T. Lin, C. Xu, E. Romero-Severson, N. Hengartner, and R. Ke, “Early Release - High Contagiousness and Rapid Spread of Severe Acute Respiratory Syndrome Coronavirus 2 - Volume 26, Number 7—July 2020 - Emerging Infectious Diseases journal - CDC,” doi: 10.3201/eid2607.200282.
+\bibitem{Lai}
+Lai A, Bergna A, Acciarri C, Galli M, Zehender G. Early Phylogenetic Estimate of the Effective Reproduction Number Of Sars‐CoV‐2. Journal of Medical Virology. 2020.
+\bibitem{Biao}
+Tang B, Wang X, Li Q, Bragazzi NL, Tang S, Xiao Y, et al. Estimation of the transmission risk of the 2019-nCoV and its implication for public health interventions. Journal of Clinical Medicine. 2020;9(2):462.
+\bibitem{WHO}
+Liu Y, Gayle AA, Wilder-Smith A, Rocklöv J. The reproductive number of COVID-19 is higher compared to SARS coronavirus. Journal of Travel Medicine. 2020.
+\bibitem{Imai}
+Imai N, Cori A, Dorigatti I, Baguelin M, Donnelly CA, Riley S, et al. Report 3: transmissibility of 2019-nCov. Reference Source. 2020.
+\bibitem{Riou}
+Riou J, Althaus CL. Pattern of early human-to-human transmission of Wuhan 2019-nCoV. bioRxiv. 2020.
+\bibitem{Zhou}
+Zhou C. Evaluating new evidence in the early dynamics of the novel coronavirus COVID-19 outbreak in Wuhan, China with real time domestic traffic and potential asymptomatic transmissions. medRxiv. 2020.
+\bibitem{Shao}
+Shao N, Cheng J, Chen W. The reproductive number R0 of COVID-19 based on estimate of a statistical time delay dynamical system. medRxiv. 2020.
+\bibitem{Shen}
+Shen M, Peng Z, Xiao Y, Zhang L. Modelling the epidemic trend of the 2019 novel coronavirus outbreak in China. bioRxiv. 2020.
+\bibitem{Read}
+Read JM, Bridgen JR, Cummings DA, Ho A, Jewell CP. Novel coronavirus 2019-nCoV: early estimation of epidemiological parameters and epidemic predictions. medRxiv. 2020.
+\bibitem{Li}
+Li Q, Guan X, Wu P, Wang X, Zhou L, Tong Y, et al. Early transmission dynamics in Wuhan, China, of novel coronavirus–infected pneumonia. New England Journal of Medicine. 2020.
+\bibitem{Du}
+Du Z, Wang L, Cauchemez S, Xu X, Wang X, Cowling BJ, et al. Risk for Transportation of 2019 Novel Coronavirus (COVID-19) from Wuhan to Cities in China. medRxiv. 2020.
+\bibitem{Li2}
+Li R, Pei S, Chen B, Song Y, Zhang T, Yang W, et al. Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (COVID-19). medRxiv. 2020.
+\bibitem{Liu}
+Liu T, Hu J, Kang M. Transmission dynamics of 2019 novel coronavirus (2019-nCoV). bioRxiv 2020; published online Jan 26. DOI.10(2020.01):25.919787.
+\bibitem{Liu2}
+Liu Y, Gayle AA, Wilder-Smith A, Rocklöv J. The reproductive number of COVID-19 is higher compared to SARS coronavirus. Journal of Travel Medicine. 2020.
+\bibitem{Cao}
+Cao Z Zhang Q, Lu X et al. Estimating the effective reproduction number of the 2019-nCoV in China. medRxiv 2020.
+\bibitem{Jung}
+Jung S-m, Akhmetzhanov AR, Hayashi K, Linton NM, Yang Y, Yuan B, et al. Real-Time Estimation of the Risk of Death from Novel Coronavirus (COVID-19) Infection: Inference Using Exported Cases. Journal of Clinical Medicine. 2020;9(2):523.
+\bibitem{Zhao}
+Zhao S, Lin Q, Ran J, Musa SS, Yang G, Wang W, et al. Preliminary estimation of the basic reproduction number of novel coronavirus (2019-nCoV) in China, from 2019 to 2020: A data-driven analysis in the early phase of the outbreak. International Journal of Infectious Diseases. 2020.
+\bibitem{Zhou2}
+Zhang KK, Xie L, Lawless L, Zhou H, Gao G, Xue C. Characterizing the transmission and identifying the control strategy for COVID-19 through epidemiological modeling. medRxiv. 2020.
+\bibitem{Majumder}
+Majumder MS, Rivers C, Lofgren E, Fisman D. Estimation of MERS-coronavirus reproductive number and case fatality rate for the spring 2014 Saudi Arabia outbreak: insights from publicly available data. PLoS Currents. 2014;6.
+\bibitem{Joseph}
+Wu JT, Leung K, Leung GM. Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study. The Lancet. 2020.
+\bibitem{Sanche}
+Sanche S, Lin YT, Xu C, Romero-Severson E, Hengartner NW, Ke R. The Novel Coronavirus, 2019-nCoV, is Highly Contagious and More Infectious Than Initially Estimated. arXiv preprint arXiv:200203268. 2020.
+\bibitem{Park}
+Park SW, Champredon D, Earn DJ, Li M, Weitz JS, Grenfell BT, et al. Reconciling early-outbreak preliminary estimates of the basic reproductive number and its uncertainty: a new framework and applications to the novel coronavirus (2019-nCoV) outbreak. medRxiv. 2020.
+\bibitem{Muniz}
+Muniz-Rodriguez K, Chowell G, Cheung C-H, Jia D, Lai P-Y, Lee Y, et al. Epidemic doubling time of the COVID-19 epidemic by Chinese province. medRxiv. 2020.
+\bibitem{Zhang}
+Zhang S, Diao M, Yu W, Pei L, Lin Z, Chen D. Estimation of the reproductive number of Novel Coronavirus (COVID-19) and the probable outbreak size on the Diamond
+Princess cruise ship: A data-driven analysis. International Journal of Infectious Diseases. 2020]
+\bibitem{covid19weather}
+Davide Bonin. Weather Data for COVID-19 Data Analysis, 2020.
+\url{https://www.kaggle.com/davidbnn92/weather-data-for-covid19-data-analysis}
+\bibitem{weatherdata}
+NOAA. Global Surface Summary of the Day, 2020.
+\url{https://www.kaggle.com/noaa/gsod}
+\bibitem{normaltest}
+Wikipedia. D'Agostino's K-squared test, 2019.
+\url{https://en.wikipedia.org/wiki/D\%27Agostino%27s_K-squared_test}
+\bibitem{geopy}
+Geopy. Geopy Documentation, 2020.
+\url{https://geopy.readthedocs.io/en/stable/}
+\bibitem{heilongjiang}
+ABC News. China moves to block new virus flare-up on Russian border, 2020.
+\url{https://abcnews.go.com/International/wireStory/china-moves-block-virus-flare-russian-border-70134699}
+\end{thebibliography}
+
+\pagebreak
+\appendixpage
+\appendix
+\section{Basic Reproduction Number Data Set}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+Study & $R_0$ & 95\% CI Lower Bound & 95\% CI Upper Bound & Study Date\\ \hline
+Lai et al. \cite{Lai} & 2.60 & 2.10 & 5.10 & 01/01/2020 \\ \hline
+Biao \cite{Biao} & 6.47 & 5.71 & 7.23 & 01/10/2020 \\ \hline
+WHO \cite{WHO} & 1.95 & 1.40 & 2.50 & 01/18/2020 \\ \hline
+Imai \cite{Imai} & 2.50 & 1.50 & 3.50 & 01/18/2020 \\ \hline
+Riou \& Althaus \cite{Riou} & 2.20 & 1.40 & 3.80 & 01/18/2020 \\ \hline
+Zhou et al. \cite{Zhou2} & 5.50 & 5.30 & 5.80 & 01/20/2020 \\ \hline
+Shao et al. \cite{Shao} & 3.32 & 3.25 & 3.4 & 01/22/2020 \\ \hline
+Shen et al. \cite{Shen} & 6.49 & 6.31 & 6.66 & 01/22/2020 \\ \hline
+Shen et al. \cite{Shen} & 4.71 & 4.50 & 4.92 & 01/22/2020 \\ \hline
+Read et al. \cite{Read} & 3.11 & 2.39 & 4.13 & 01/22/2020 \\ \hline
+Li et al. \cite{Li} & 2.20 & 1.40 & 3.90 & 01/22/2020 \\ \hline
+Du et al. \cite{Du} & 1.90 & 1.47 & 2.59 & 01/23/2020 \\ \hline
+Li et al. \cite{Li2} & 2.23 & 1.77 & 3.00 & 01/23/2020 \\ \hline
+Liu et al. \cite{Liu} & 2.90 & 2.32 & 3.63 & 01/23/2020 \\ \hline
+Liu et al. \cite{Liu} & 2.92 & 2.28 & 3.67 & 01/23/2020 \\ \hline
+Cao et al. \cite{Cao} & 4.08 & 3.37 & 4.77 & 01/23/2020 \\ \hline
+Jung et al. \cite{Jung} & 2.10 & 2.00 & 2.20 & 01/24/2020 \\ \hline
+Zhao et al. \cite{Zhao} & 2.24 & 1.96 & 2.55 & 01/24/2020 \\ \hline
+Jung et al. \cite{Jung} & 3.20 & 2.70 & 3.70 & 01/24/2020 \\ \hline
+Zhou et al. \cite{Zhou} & 3.58 & 2.89 & 4.39 & 01/24/2020 \\ \hline
+Majumder et al. \cite{Majumder} & 2.55 & 2.00 & 3.10 & 01/26/2020 \\ \hline
+Joseph et al. \cite{Joseph} & 2.68 & 2.47 & 2.86 & 01/28/2020 \\ \hline
+Wu et al. \cite{Joseph} & 2.68 & 2.47 & 2.86 & 01/28/2020 \\ \hline
+Sanche et al. \cite{Sanche} & 4.70 & 2.80 & 7.60 & 01/30/2020 \\ \hline
+Sanche et al. \cite{Sanche} & 5.70 & 3.80 & 8.90 & 01/30/2020 \\ \hline
+Sanche et al. \cite{Sanche} & 6.30 & 3.30 & 11.30 & 01/30/2020 \\ \hline
+Park et al. \cite{Park} & 3.10 & 2.10 & 5.70 & 01/31/2020 \\ \hline
+Zhao et al. \cite{Zhao} & 2.12 & 2.04 & 2.18 & 02/02/2020 \\ \hline
+Liu et al. \cite{Liu2} & 4.50 & 4.40 & 4.60 & 02/07/2020 \\ \hline
+Liu et al. \cite{Liu2} & 4.40 & 4.30 & 4.60 & 02/07/2020 \\ \hline
+Muniz-Rodriguez et al. \cite{Muniz} & 3.30 & 3.10 & 4.20 & 02/09/2020 \\ \hline
+Zhang et al. \cite{Zhang} & 2.28 & 2.06 & 2.52 & 02/16/2020 \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Change in exponential growth rates per government response per country}
+\begin{center}
+\begin{table}
+  %\caption{Change in growth rates}
+  \label{table:exponential_growth_rate_changes}
+  \begin{adjustbox}{width=\linewidth}
+    \csvautotabulartop[respect all]{exponential_growth_rate_changes.csv}
+  \end{adjustbox}
+\end{table}
+\end{center}
+
+\end{document}

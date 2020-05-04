@@ -1,0 +1,43 @@
+\def\LukeDoStates{1}
+
+\makeatletter
+\csvset{
+  autotabulartop/.style={
+    file=#1,
+    after head=\csv@pretable\begin{tabular}[t]{|*{\csv@columncount}{l|}}\csv@tablehead,
+    table head=\hline\csvlinetotablerow\\\hline,
+    late after line=\\,
+    table foot=\\\hline,
+    late after last line=\csv@tablefoot\end{tabular}\csv@posttable,
+    command=\csvlinetotablerow}
+}
+\makeatother
+\newcommand{\csvautotabulartop}[2][]{\csvloop{autotabulartop={#2},#1}}
+
+
+\newcommand{\AddLukeFigure}[3]{
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{luke/#1_#2_linear.pdf}
+    \caption{Linear Scale}
+  \end{subfigure}
+  \begin{subfigure}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{luke/#1_#2_log.pdf}
+    \caption{Log Scale}
+  \end{subfigure}
+
+  \begin{subfigure}{0.96\linewidth}
+    \includegraphics[width=\linewidth]{luke/#1_#2_legend.pdf}
+  \end{subfigure}
+    \caption{Doubling and cumulative cases (#3)}
+    \label{fig:doublings_#1_#2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.6\linewidth]{luke/#1_#2_test.pdf}
+  \caption{Histogram and box plot (#3)}
+  \label{fig:test_#1_#2}
+\end{figure}
+}

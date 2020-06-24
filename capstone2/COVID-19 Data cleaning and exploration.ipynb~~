@@ -1,4 +1,4 @@
-
+{
  "cells": [
   {
    "cell_type": "code",
@@ -681,7 +681,7 @@
    "outputs": [],
    "source": [
     "owid_df =pd.read_csv('./covid-19-data/public/data/owid-covid-data.csv')\n",
-    "owid_df= owid_df[owid_df.new_cases_per_thousand > 0]#.new_cases_per_thousand.\n",
+    "owid_df= owid_df[owid_df.new_cases_per_million > 0]#.new_cases_per_million.\n",
     "owid_df = regularize_names(owid_df, datekey='date', locationkey='location').set_index(['location', 'date']).sort_index()"
    ]
   },
@@ -1066,7 +1066,7 @@
     "    df.loc[country_indices, ['population','population_density']] = \\\n",
     "    df.loc[country_indices,  ['population','population_density']].fillna(method='ffill').fillna(method='bfill').values \n",
     "    \n",
-    "per_thousand_population = df.population / 1000000.\n",
+    "per_million_population = df.population / 1000000.\n",
     "population_density = df.population_density\n"
    ]
   },
@@ -1298,8 +1298,8 @@
    "source": [
     "investigation_df = df.copy()\n",
     "\n",
-    "investigation_df.loc[:, 'new_tests_per_thousand'] = df.loc[:, 'new_tests_weighted'].values   / per_thousand_population.values\n",
-    "investigation_df.loc[:, 'new_cases_per_thousand'] =  df.loc[:, 'new_cases_weighted'].values  / per_thousand_population.values\n",
+    "investigation_df.loc[:, 'new_tests_per_million'] = df.loc[:, 'new_tests_weighted'].values   / per_million_population.values\n",
+    "investigation_df.loc[:, 'new_cases_per_million'] =  df.loc[:, 'new_cases_weighted'].values  / per_million_population.values\n",
     "\n",
     "# investigation_df.loc[:, 'n_tests_per_density'] =  df.loc[:, 'n_tests_weighted'].values   / population_density.values\n",
     "# investigation_df.loc[:, 'n_cases_per_density'] = df.loc[:, 'n_cases_weighted'].values  / population_density.values\n",
@@ -1323,13 +1323,13 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "top10poptests = investigation_df.loc[present_day_df.new_tests_per_thousand.sort_values()[-10:].index,:].location\n",
+    "top10poptests = investigation_df.loc[present_day_df.new_tests_per_million.sort_values()[-10:].index,:].location\n",
     "plttmp = investigation_df[investigation_df.location.isin(top10poptests)]\n",
-    "plttmp.set_index(['date_proxy', 'location']).new_tests_per_thousand.unstack().plot(figsize=(5,5))\n",
+    "plttmp.set_index(['date_proxy', 'location']).new_tests_per_million.unstack().plot(figsize=(5,5))\n",
     "plt.legend(loc=(1,0))\n",
-    "top10popcases= investigation_df.loc[present_day_df.new_cases_per_thousand.sort_values()[-10:].index,:].location\n",
+    "top10popcases= investigation_df.loc[present_day_df.new_cases_per_million.sort_values()[-10:].index,:].location\n",
     "plttmp = investigation_df[investigation_df.location.isin(top10popcases)]\n",
-    "plttmp.set_index(['date_proxy', 'location']).new_cases_per_thousand.unstack().plot(figsize=(5,5))\n",
+    "plttmp.set_index(['date_proxy', 'location']).new_cases_per_million.unstack().plot(figsize=(5,5))\n",
     "plt.legend(loc=(1,0))\n"
    ]
   },
@@ -1390,7 +1390,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "To reiterate my logic: I want or perhaps need to normalize the data. If I normalize simply on a \"per thousand people\" basis,\n",
+    "To reiterate my logic: I want or perhaps need to normalize the data. If I normalize simply on a \"per million people\" basis,\n",
     "small micro-states such as San Marino will take on disproportionate values. I could drop these countries or look\n",
     "for other weighting techniques; I opt for the latter method. The other two options I explore are weighting by population density, and weighting by the percentage of the world's population that each country comprises. The goal is to find a normalization which captures how hard individual countries have been hit but also the possible future downside, which\n",
     "is of course is dependent upon how many people live in a country.\n",
@@ -1405,7 +1405,7 @@
    "metadata": {},
    "source": [
     "The current per capita weighting gives undue influence to microstate nations such as San Marino, as their population is\n",
-    "only a small fraction of 1 thousand. Therefore, remove the countries in the bottom 10 percent (arbitrary) of populations. "
+    "only a small fraction of 1 million. Therefore, remove the countries in the bottom 10 percent (arbitrary) of populations. "
    ]
   },
   {
@@ -1423,10 +1423,10 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "# df.loc[:, 'n_tests_weighted'] =  df.loc[:, 'n_tests_weighted'].values / per_thousand_population.loc[df.index].values\n",
-    "# df.loc[:, 'n_cases_weighted'] = df.loc[:, 'n_cases_weighted'].values  / per_thousand_population.loc[df.index].values\n",
-    "# df.loc[:, 'n_deaths_weighted'] = df.loc[:, 'n_deaths_weighted'].values  / per_thousand_population.loc[df.index].values\n",
-    "# df.loc[:, 'n_recovered_weighted'] =  df.loc[:, 'n_recovered_weighted'].values  / per_thousand_population.loc[df.index].values"
+    "# df.loc[:, 'n_tests_weighted'] =  df.loc[:, 'n_tests_weighted'].values / per_million_population.loc[df.index].values\n",
+    "# df.loc[:, 'n_cases_weighted'] = df.loc[:, 'n_cases_weighted'].values  / per_million_population.loc[df.index].values\n",
+    "# df.loc[:, 'n_deaths_weighted'] = df.loc[:, 'n_deaths_weighted'].values  / per_million_population.loc[df.index].values\n",
+    "# df.loc[:, 'n_recovered_weighted'] =  df.loc[:, 'n_recovered_weighted'].values  / per_million_population.loc[df.index].values"
    ]
   },
   {
@@ -1746,9 +1746,9 @@
     "I'm electing to fill the time independent features which are ***still*** missing with the median of ***all*** current values; otherwise\n",
     "I would have to drop them because of the missing values. For the time dependent features, I'll fill with 0's.\n",
     "\n",
-    "Because the features I will be predicting are all measured per thousand people, it seems unwise to include\n",
+    "Because the features I will be predicting are all measured per million people, it seems unwise to include\n",
     "very small countries and microstates such as San Marino; whose small population makes them has the maximum \n",
-    "value in all quantities measured \"per thousand\". In other words, I want to normalize by population but the\n",
+    "value in all quantities measured \"per million\". In other words, I want to normalize by population but the\n",
     "dynamics of these small states seems to be fundamentally different due to size."
    ]
   },
@@ -2183,7 +2183,7 @@
     "_ = plt.scatter(early_d_rates, early_df_present_day.n_cases_weighted.values, label='Early responders')\n",
     "_ = plt.scatter(late_d_rates, late_df_present_day.n_cases_weighted.values, label='Late responders')\n",
     "_ = plt.xlabel('Estimated death rate, (% of total cases)')\n",
-    "_ = plt.ylabel('Number of cases per thousand people')\n",
+    "_ = plt.ylabel('Number of cases per million people')\n",
     "_ = plt.legend(loc=(0.6,0.8))\n",
     "# plt.plot(np.sort(death_rate))"
    ]

@@ -108,6 +108,8 @@ data/
 *.csv
 *.sqlite
 *.xlsx
+*.zip
+*.jpg
 
 practice/
 

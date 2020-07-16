@@ -121,6 +121,8 @@ practice/
 *.log
 *.bcf
 *.cbx
+*.ipynb~
+*.ipynb~~
 
 #capstone2specific
 COVID-19/
@@ -129,3 +131,4 @@ ihme-covid19/
 covid-policy-tracker/
 covid-19-data/
 capstone2/*_data/
+ignore/

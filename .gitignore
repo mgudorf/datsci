@@ -7,6 +7,8 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+
+private/
 .Python
 build/
 develop-eggs/
@@ -104,7 +106,6 @@ venv.bak/
 .mypy_cache/
 
 #data files
-data/
 *.csv
 *.sqlite
 *.xlsx
@@ -124,6 +125,9 @@ practice/
 *.ipynb~
 *.ipynb~~
 
+# random
+miniprojects/data_wrangling_json/data/
+
 #cap1
 capstone1/ignore/
 
@@ -131,11 +135,13 @@ capstone1/ignore/
 COVID-19/
 PM_COVID/
 ihme-covid19/
+ihme/
 covid-policy-tracker/
 covid-19-data/
-capstone2/*_data/
 capstone2/ignore/
 
 #me specific
 latex/
 graveyard.ipynb
+
+*/data/

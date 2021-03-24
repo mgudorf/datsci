@@ -22,13 +22,10 @@ Logistic regression and Random Forest for predicting loan outcome.
 Modeling notebook for "step two" of the two-step recommendation system. Comparison
 of ridge regression and SGD for prediction of loan recoveries.  
 
-To-do
------
-PEP 8 most of the notebooks.
-There is something unusual happening in the regression notebook with regards to 3 features. 
-Loan classification models are overtraining; need to tune more or take another look at the data used to train.
+# Data
 
-
+To run the notebooks, unzip loan.csv into data folder. Then run 
+```Lending_club_data_cleaning.ipynb``` to generate the other .csv files used for EDA and modeling. 
 
 
 
